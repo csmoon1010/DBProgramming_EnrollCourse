@@ -24,8 +24,15 @@ try{
 }
 String session_id = (String)session.getAttribute("user");
 String userPassword = request.getParameter("userPassword");
+String userEmail = request.getParameter("userEmail");
 String userAddress = request.getParameter("userAddress");
-String mySQL = "update student set s_pwd = '" + userPassword + "', s_addr= '" + userAddress + "' where s_id = '" + session_id + "'";
+String userBank = request.getParameter("userBank");
+String userAccount = request.getParameter("userAccount");
+String userPhone = request.getParameter("userPhone");
+String mySQL = "update student set s_pwd = '" + userPassword + "', s_email= '" 
++ userEmail + "', s_addr= '" + userAddress + "', s_bank = '" 
++ userBank + "', s_bank_acc = '" + userAccount + "', s_phone = '" 
++ userPhone + "' where s_id = '" + session_id + "'";
 //String mySQL = "update student set s_pwd = '" + userPassword + "' where s_id = '" + session_id + "'";
 try{
 	stmt.executeUpdate(mySQL);%>
@@ -35,6 +42,7 @@ try{
 	String sMessage;
 	if(ex.getErrorCode() == 20002)	sMessage = "암호는 4자리 이상이어야 합니다";
 	else if(ex.getErrorCode() == 20003)	sMessage = "암호에 공란은 입력되지 않습니다.";
+	else if(ex.getErrorCode() == 20004) sMessage = "이메일 형식이 맞지 않습니다.";
 	else	sMessage = "잠시 후 다시 시도하십시오.";
 	%><script>alert('<%=sMessage%>');
 	location.href = 'update.jsp';</script>

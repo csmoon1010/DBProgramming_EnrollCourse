@@ -34,7 +34,13 @@ try{
 	System.out.println("오라클 연결 실패");
 }
 
-mySQL = "select c_id, c_id_no, c_name, c_unit from course where c_id not in(select c_id from enroll where s_id = '" 
+//현 학기에 해당하는 과목만 보여주기
+CallableStatement cstmt = myConn.prepareCall("{? = call Date2EnrollSem(SYSDATE)}");
+cstmt.registerOutParameter(1, java.sql.Types.INTEGER);
+cstmt.execute();
+int sem = cstmt.getInt(1);
+mySQL = "select c.c_id, c.c_id_no, c_name, c_unit from course c, teach t where c.c_id = t.c_id and c.c_id_no = t.c_id_no and t_sem = " 
++ sem + " and c.c_id not in(select c_id from enroll where s_id = '" 
 + session_id + "')";
 myResultSet = stmt.executeQuery(mySQL);
 
