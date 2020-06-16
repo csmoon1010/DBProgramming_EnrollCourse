@@ -35,7 +35,7 @@
 		pstmt = myConn.prepareStatement //테이블 출력 pstmt
 				("select c.c_id, c.c_id_no, c_name, c_unit, c_major, NVL(c_Elevel, ' '), t_date, t_time, t_prof, t_room" 
 						+" from course c, teach t where c.c_id = t.c_id and c.c_id_no = t.c_id_no and t_sem = ? and" 
-						+ " c.c_id not in(select c_id from enroll where s_id = ?) and c_major LIKE ?");
+						+ " (c.c_id, c.c_id_no) not in(select c_id, c_id_no from enroll where s_id = ?) and c_major LIKE ?");
 	}catch(ClassNotFoundException e){
 		System.out.println("jdbc driver 로딩 실패");
 	}catch(SQLException e){
