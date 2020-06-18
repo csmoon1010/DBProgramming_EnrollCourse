@@ -33,9 +33,9 @@
 		myConn = DriverManager.getConnection(url, user, password);
 		stmt = myConn.createStatement();
 		pstmt = myConn.prepareStatement //테이블 출력 pstmt
-				("select c.c_id, c.c_id_no, c_name, c_unit, c_major, NVL(c_Elevel, ' '), t_date, t_time, t_prof, t_room" 
-						+" from course c, teach t where c.c_id = t.c_id and c.c_id_no = t.c_id_no and t_sem = ? and" 
-						+ " (c.c_id, c.c_id_no) not in(select c_id, c_id_no from enroll where s_id = ?) and c_major LIKE ?");
+				("select c.c_id, c.c_id_no, c_name, c_unit, c_major, NVL(c_Elevel, ' '), t_date, t_time, t_prof, t_room, t_max" 
+		+ " from course c, teach t where c.c_id = t.c_id and c.c_id_no = t.c_id_no" 
+				+" and t_sem = ? and (c.c_id, c.c_id_no) not in(select c_id, c_id_no from enroll where s_id = ?) and c_major LIKE ?");
 	}catch(ClassNotFoundException e){
 		System.out.println("jdbc driver 로딩 실패");
 	}catch(SQLException e){
@@ -91,7 +91,7 @@
 			}
 			%>
 			<tr><th>과목번호</th><th>분반</th><th>과목명</th><th>학점</th><th>주관학과</th><th>레벨</th>
-			<th>요일</th><th>시간</th><th>교수</th><th>강의실</th><th>수강신청</th></tr>
+			<th>요일</th><th>시간</th><th>교수</th><th>강의실</th><th>정원</th><th>수강신청</th></tr>
 			<% myResultSet = pstmt.executeQuery();
 			if(myResultSet != null){
 				while(myResultSet.next()){
@@ -105,6 +105,7 @@
 					int t_time = myResultSet.getInt(8);
 					String t_prof = myResultSet.getString(9);
 					String t_room = myResultSet.getString(10);
+					int t_max = myResultSet.getInt(11);
 					if(i==3){
 						if(c_major.equals(loginMajor) || c_major.equals("교양"))	continue;
 					}%>
@@ -114,12 +115,15 @@
 				<td align = "center"><%=c_major %></td><td align = "center"><%=c_Elevel %></td>
 				<td align = "center"><%=t_date %></td><td align = "center"><%=t_time %></td>
 				<td align = "center"><%=t_prof %></td><td align = "center"><%=t_room %></td>
+				<td align = "center"><%=t_max %></td>
 				<td align = "center"><a href="insert_verify.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>">신청</a></td>
 				</tr>
 				<%}
 			}%>
 			</table>
 		<%}%>
+	</div>
+</div>
 <%
 	pstmt.close();
 	stmt.close();
