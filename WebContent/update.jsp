@@ -3,7 +3,7 @@
 <%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
-<head><meta charset="UTF-8">
+
 <title>수강신청 사용자 정보 수정</title></head>
 <body>
 <%@ include file="top.jsp" %>

@@ -26,8 +26,8 @@
 	String loginMajor = "";
 	ResultSet myResultSet = null;
 	ResultSet majorResultSet = null;
-	int sem = 0;
 	int currentTab = 0;
+	int sem = 0;
 	try{
 		Class.forName(driver);
 		myConn = DriverManager.getConnection(url, user, password);
@@ -42,12 +42,16 @@
 		System.out.println("오라클 연결 실패");
 	}
 	//현 학기에 해당하는 과목만 보여주기
-	CallableStatement cstmt = myConn.prepareCall("{? = call Date2EnrollSem(SYSDATE)}"); //stored function 이용
+	CallableStatement cstmt = myConn.prepareCall("{? = call Date2EnrollYear(SYSDATE)}"); //stored function 이용
 	cstmt.registerOutParameter(1, java.sql.Types.INTEGER);
+	CallableStatement cstmt2 = myConn.prepareCall("{? = call Date2EnrollSemester(SYSDATE)}");
+	cstmt2.registerOutParameter(1, java.sql.Types.INTEGER);
 	try{
 		cstmt.execute();
-		sem = cstmt.getInt(1);
-		int year = sem/10; int semester = sem%10;
+		cstmt2.execute();
+		int year = cstmt.getInt(1);
+		int semester = cstmt2.getInt(1);
+		sem = year * 10 + semester;
 		%><script>document.getElementById('semesterInfo').innerHTML = "<%=year%>년  <%=semester%>학기";</script><%
 	}catch(SQLException e){
 		System.err.println("SQLException: " + e.getMessage());
