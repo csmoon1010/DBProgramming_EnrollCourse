@@ -1,37 +1,34 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import = "java.sql.*" %>
+<%@ page contentType="text/html; charset=EUC-KR" %>
+<%@page import="java.sql.*"%>
 <%
-String userID = request.getParameter("userID");
-String userPassword = request.getParameter("userPassword");
-String driver = "oracle.jdbc.driver.OracleDriver";
-String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-String user = "db1713462";
-String password = "ss2";
+String userID=request.getParameter("userID");
+String userPassword=request.getParameter("userPassword");
+
 Connection myConn = null;
 Statement stmt = null;
-try{
-	Class.forName(driver);
-	myConn = DriverManager.getConnection(url, user, password);
-	stmt = myConn.createStatement();
-}catch(ClassNotFoundException e){
-	System.out.println("jdbc driver ๋ก๋”ฉ ์คํจ");
-}catch(SQLException e){
-	System.out.println("์ค๋ผํด ์—ฐ๊ฒฐ ์คํจ");
-}
-String mySQL = "select s_id from student where s_id='" + userID + "' and s_pwd='" + userPassword +"'";
-ResultSet rs = stmt.executeQuery(mySQL);
+String mySQL = null;
+ResultSet rs = null;
+
+String dburl = "jdbc:oracle:thin:@localhost:1521:orcl";
+String user = "db1713462"; String passwd = "ss2";
+String dbdriver = "oracle.jdbc.driver.OracleDriver";
+
+Class.forName(dbdriver);//jdbc ตๅถ๓ภฬน๖ ทฮต๙
+myConn=DriverManager.getConnection(dburl, user, passwd);//jdbcตๅถ๓ภฬน๖ธฆ ภฬฟ๋วั ตฅภฬลอบฃภฬฝบ ฟฌฐแ
+stmt = myConn.createStatement();
+
+mySQL="select s_id from student where s_id='" + userID + "'and s_pwd='" + userPassword + "'";
+
+rs = stmt.executeQuery(mySQL);
+
 if(rs.next()){
-	session.setAttribute("user", rs.getString(1));%>
-	<script>
-	alert("๋ก๊ทธ์ธ์ฑ๊ณต");
-	location.href="main.jsp";</script>
-<%}
-else{%>
-	<script>
-	alert("๋ก๊ทธ์ธ์คํจ");
-	location.href="login.jsp";</script>
-<%}
+	session.setAttribute("user", userID);
+	response.sendRedirect("main.jsp");
+}
+else{
+	response.sendRedirect("login.jsp");
+}
+
 stmt.close();
 myConn.close();
 %>

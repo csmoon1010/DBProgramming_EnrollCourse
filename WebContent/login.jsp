@@ -1,31 +1,30 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=EUC-KR" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>ìˆ˜ê°•ì‹ ì²­ ì‹œìŠ¤í…œ ë¡œê·¸ì¸</title>
-</head>
+<head><link href="style.css" rel="stylesheet" type="text/css"> 
+<meta charset="UTF-8"> <title>¼ö°­½ÅÃ» ½Ã½ºÅÛ ·Î±×ÀÎ</title> </head>
 <body>
-<table width="75%" align="center" bgcolor="#FFFF99" border>
-<tr><td><div align="center">ì•„ì´ë””ì™€ íŒ¨ìŠ¤ì›Œë“œë¥¼ ìž…ë ¥í•˜ì„¸ìš”</div></td></tr>
-</table>
-<table width="75%" align="center" border>
+<br><br>
+<table  class="top2" width="70%" align="center" border>
+<tr> <td><div align="center">¾ÆÀÌµð¿Í ÆÐ½º¿öµå¸¦ ÀÔ·ÂÇÏ¼¼¿ä </div></td></table>
+<table width="70%" align="center" border>
 <form method="post" action="login_verify.jsp">
 <tr>
-<td><div align="center">ì•„ì´ë””</div></td>
-<td><div align="center"><input type="text" name="userID"></div></td>
-</tr>
-<tr>
-<td><div align="center">íŒ¨ìŠ¤ì›Œë“œ</div></td>
-<td><div align="center"><input type="password" name="userPassword"></div></td>
-</tr>
-<tr>
-<td colspan=2><div align="center">
-<input type="SUBMIT" name="Submit" value="ë¡œê·¸ì¸">
-<input type="RESET" value="ì·¨ì†Œ">
+<td><div>¾ÆÀÌµð</div></td>
+<td><div>
+<input type="text" name="userID">
 </div></td>
 </tr>
+<tr>
+<td><div>ÆÐ½º¿öµå</div></td>
+<td><div>
+<input type="password" name="userPassword">
+</div></td></tr>
+<tr>
+<td colspan=2><div align="center">
+<INPUT TYPE="SUBMIT" NAME="Submit" VALUE="·Î±×ÀÎ"> <INPUT
+TYPE="RESET" VALUE="Ãë¼Ò">
+</div></td></tr>
 </form>
 </table>
 </body>

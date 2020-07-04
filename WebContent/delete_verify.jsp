@@ -29,41 +29,41 @@ pstmt.setString(1, c_id);
 result = pstmt.executeQuery();
 
 if(result.next()){
-   String id = result.getString("c_id");
-   String id_no = result.getString("c_id_no");
-   
-   if(c_id.equals(id)){
-      sql = "delete from enroll where c_id = ?";
-      pstmt = myConn.prepareStatement(sql);
-      pstmt.setString(1, c_id);
-      pstmt.executeUpdate();
-      %>
-      <script>
-      alert("해당 과목 수강신청을 취소하였습니다.");
-      location.href="delete.jsp";
-      </script>
+	String id = result.getString("c_id");
+	String id_no = result.getString("c_id_no");
+	
+	if(c_id.equals(id)){
+		sql = "delete from enroll where c_id = ?";
+		pstmt = myConn.prepareStatement(sql);
+		pstmt.setString(1, c_id);
+		pstmt.executeUpdate();
+		%>
+		<script>
+		alert("해당 과목 수강신청을 취소하였습니다.");
+		location.href="delete.jsp";
+		</script>
 
-      <%
-      
-   }else{
-      %>
-      <script>
-      alert("수강신청 취소 오류.");
-      location.href="delete.jsp";
-      </script>
+		<%
+		
+	}else{
+		%>
+		<script>
+		alert("수강신청 취소 오류.");
+		location.href="delete.jsp";
+		</script>
 
-      <%
-   }
-  	}else{
-      %>
-      <script>
-      alert("수강신청 취소 오류.");
-      location.href="delete.jsp";
-      </script>
+		<%
+	}
+	}else{
+		%>
+		<script>
+		alert("수강신청 취소 오류.");
+		location.href="delete.jsp";
+		</script>
 
-      <%
-   
-   }
+		<%
+	
+	}
 
 
 } catch(SQLException ex) {

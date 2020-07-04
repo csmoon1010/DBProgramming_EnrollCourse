@@ -1,0 +1,76 @@
+@charset "utf-8";
+/*메뉴바*/
+.top{
+	background-color:#99CCFF;
+	border-collapse:collapse;
+	border-radius: 7px;
+	height: 35px;
+}
+
+/*login.jsp*/
+.top2{
+	background-color:#99CCFF;
+	height: 35px;
+}
+/*로그인 후 눈송이*/
+.img1{
+	width:70px;
+	height:90px;
+	position:relative;
+	left:56%;
+	top:190px;
+}
+/*로그인 전 눈송이*/
+.img2{
+	width:70px;
+	height:90px;
+	position:relative;
+	left:55%;
+	top:190px;
+}
+
+/*신청, 삭제 a태그*/
+#Wcolor{
+	color:black;
+	font-size: 1.1rem;
+}
+
+/*출력 테이블 맨 윗줄에 넣고싶다*/
+#Bcolor{
+	background-color:#99CCFF;
+}
+table{
+	border-collapse:collapse;
+}
+table td{
+	text-align:center;
+	font-family:Monospace;
+	font-size: 1.2rem;
+	padding: 10px;
+}
+/*top.jsp : 로그인 태그 때문에 페이지 내에서 a태그에 속성 적용*/
+a{
+color:white;
+font-family:Monospace;
+font-size: 1.5rem;
+text-decoration: none;
+}
+a:hover{
+text-decoration: underline;
+font-weight:bolder;
+}
+
+/*insert.jsp*/
+#semesterInfo{
+   text-align:center;
+   font-family:Monospace;
+	font-size: 1.4rem;
+}
+
+/*update.jsp*/
+.editable{
+   width:70%;
+   text-align:center;
+   font-family:Monospace;
+	font-size: 1.2rem;
+}
